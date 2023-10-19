@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "ProductDetails";
+}
+
+<h2>ProductDetails</h2>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<table class="table table-bordered">
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+    </tr>
+    @foreach (var s in ViewBag.Catagories)
+    {
+        <tr>
+            <td>@s.Id</td>
+        </tr>
+    }
+</table>
