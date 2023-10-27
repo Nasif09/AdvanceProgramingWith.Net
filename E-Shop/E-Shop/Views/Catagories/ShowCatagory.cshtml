@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<E_Shop.EF.Catagory>
 
 @{
-    ViewBag.Title = "ViewAllCatagories";
+    ViewBag.Title = "ShowCatagory";
 }
 
-<h2>ViewAllCatagories</h2>
+<h2>ShowCatagory</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "AddCatagories")
 </p>
 <table class="table">
     <tr>
@@ -23,8 +23,8 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Edit", "EditCatagory", new { id=item.Id }) |
+            @Html.ActionLink("Details", "CatagoryDetails", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>

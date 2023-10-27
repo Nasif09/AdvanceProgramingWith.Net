@@ -1,0 +1,33 @@
+﻿@model E_Shop.EF.Catagory
+
+@{
+    ViewBag.Title = "CatagoryDetails";
+}
+
+<h2>CatagoryDetails</h2>
+
+<div>
+    <h4>Catagory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditCatagory", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "ShowCatagory")
+</p>

@@ -1,5 +1,4 @@
 ﻿using E_Shop.EF;
-using E_Shop.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,20 +15,72 @@ namespace LabTask1.Controllers
             var data = db.Products.ToList();
             return View(data);
         }
+        [HttpGet]
+        public ActionResult AddProduct()
+        {
+            var db = new Online_ShopEntities();
+            ViewBag.Catagories = new SelectList(db.Catagories, "Id", "Name");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddProduct(Product product)
+        {
+            var db = new Online_ShopEntities();
+            bool productExists = db.Products.Any(p => p.Name == product.Name);
+            if (productExists)
+            {
+                ModelState.AddModelError("Name", "A product with the same name already exists.");
+                return View(product);
+            }
+            db.Products.Add(product);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         public ActionResult Details(int id)
         {
             var db = new Online_ShopEntities();
-            var data = db.Products.Find(id);
-            ViewBag.Catagories = (from c in db.Catagories where c.Id == data.CatagoryId select c).ToList();
-            return View(data);
+            var res = db.Products.Find(id);
+            if (res != null)
+            {
+                var category = db.Catagories.FirstOrDefault(c => c.Id == res.CatagoryId);
+
+                if (category != null)
+                {
+                    ViewBag.CatagoryName = category.Name;
+                }
+                else
+                {
+                    ViewBag.CatagoryName = "Category Not Found";
+                }
+            }
+
+            return View(res);
         }
-        [HttpPost]
-        public ActionResult Edit(Product d)
+        
+        [HttpGet]
+        public ActionResult Edit(int id)
         {
             var db = new Online_ShopEntities();
-            var data = db.Products.Find(d.Id);
-            data.Name = d.Name;
+            var res = db.Products.Find(id);
+            ViewBag.Catagories = new SelectList(db.Catagories, "Id", "Name");
+            return View(res);
+        }
+        [HttpPost]
+        public ActionResult Edit(Product product)
+        {
+            var db = new Online_ShopEntities();
+
+            bool productExists = db.Products.Any(p => p.Name == product.Name);
+            if (productExists)
+            {
+                ModelState.AddModelError("Name", "A product with the same name already exists.");
+                return View(product);
+            }
+            var exdata = db.Products.Find(product.Id);
+            exdata.Name = product.Name;
+            exdata.CatagoryId = product.CatagoryId;
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
         public ActionResult Delete(int id)
@@ -39,38 +90,6 @@ namespace LabTask1.Controllers
             db.Products.Remove(data);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        public ActionResult ShowAllProducts()
-        {
-            var db = new Online_ShopEntities();
-            var data = db.Products.ToList();
-            return View(data);
-        }
-
-
-
-
-        [HttpGet]
-        public ActionResult AddCatagories()
-        {
-            var db = new Online_ShopEntities();
-            ViewBag.Departments = db.Catagories.ToList();
-            return View();
-        }
-        [HttpPost]
-        public ActionResult AddCatagories(Catagory c)
-        {
-            var db = new Online_ShopEntities();
-            db.Catagories.Add(c);
-            db.SaveChanges();
-            return RedirectToAction("ViewAllCatagories");
-        }
-        public ActionResult ViewAllCatagories()
-        {
-            var db = new Online_ShopEntities();
-            var data = db.Catagories.ToList();
-            return View(data);
         }
 
         public ActionResult About()
