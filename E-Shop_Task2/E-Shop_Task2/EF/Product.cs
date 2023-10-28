@@ -14,10 +14,19 @@ namespace E_Shop_Task2.EF
     
     public partial class Product
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int CatagoryId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.OrderItems = new HashSet<OrderItem>();
+        }
     
-        public virtual Catagory Catagory { get; set; }
+        public int? ProductId { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int  CategoryId { get; set; }
+    
+        public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

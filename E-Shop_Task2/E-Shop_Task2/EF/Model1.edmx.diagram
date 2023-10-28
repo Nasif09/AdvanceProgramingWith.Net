@@ -4,11 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bbc5168a8feb4c1eb6c64a3855eba6b8" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.Catagory" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+      <Diagram DiagramId="ba11eb1d1b574243a491dca5c5ebab94" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Category" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="2.625" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OrderItem" Width="1.5" PointX="5.875" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Order" Width="1.5" PointX="5.625" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Product" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="Model.FK_Products_Catagories" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Model.Login" Width="1.5" PointX="0.75" PointY="3.75" />
+        <AssociationConnector Association="Model.FK_Products_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_OrderItems_Orders" />
+        <AssociationConnector Association="Model.FK_OrderItems_Products" />
+        <AssociationConnector Association="Model.FK_Orders_Customers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

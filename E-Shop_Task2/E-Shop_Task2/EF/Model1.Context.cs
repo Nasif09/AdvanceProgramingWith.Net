@@ -13,10 +13,10 @@ namespace E_Shop_Task2.EF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Online_ShopEntities : DbContext
+    public partial class Online_MarketEntities1 : DbContext
     {
-        public Online_ShopEntities()
-            : base("name=Online_ShopEntities")
+        public Online_MarketEntities1()
+            : base("name=Online_MarketEntities1")
         {
         }
     
@@ -25,8 +25,10 @@ namespace E_Shop_Task2.EF
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Catagory> Catagories { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<OrderItem> OrderItems { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Login> Logins { get; set; }
     }
 }
