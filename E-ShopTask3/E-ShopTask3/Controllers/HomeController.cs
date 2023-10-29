@@ -17,7 +17,7 @@ namespace E_ShopTask3.Controllers
             }
             else
             {
-                var db = new Online_MarketEntities3();
+                var db = new Online_MarketEntities5();
                 var data = db.Products.ToList();
                 return View(data);
             }
@@ -33,7 +33,7 @@ namespace E_ShopTask3.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            var db = new Online_MarketEntities3();
+            var db = new Online_MarketEntities5();
             var matchs = db.Customers.FirstOrDefault(u => u.Username == username && u.Password == password);
 
             if (matchs != null)
@@ -58,7 +58,7 @@ namespace E_ShopTask3.Controllers
             }
             else
             {
-                var db = new Online_MarketEntities3();
+                var db = new Online_MarketEntities5();
                 var productToAdd = (from d in db.Products where d.ProductId == id select d).SingleOrDefault();
                 List<Product> cart = Session["Cart"] as List<Product> ?? new List<Product>();
 
@@ -83,6 +83,78 @@ namespace E_ShopTask3.Controllers
                 return View(cart);
             }
         }
+        [HttpGet]
+        public ActionResult ConfirmOrder()
+        {
+            if (Session["CustomerUsernmae"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            // Retrieve cart items from session
+            var cart = Session["Cart"] as List<Product> ?? new List<Product>();
+
+            // Calculate total quantity and price
+            int totalQuantity = cart.Sum(p => p.Quantity);
+            decimal totalPrice = cart.Sum(p => p.Price * p.Quantity);
+
+            // Get the currently logged-in customer's ID
+            int customerId = GetCustomerIdFromUsername(Session["CustomerUsernmae"].ToString());
+
+            // Create a new order object with the calculated values
+            Order order = new Order
+            {
+                CustomerId = customerId,
+                IssueDate = DateTime.Now,
+                Quantity = totalQuantity,
+                Price = totalPrice,
+                Status = "Pending" // You can set the initial status as needed
+            };
+
+            // Save the order to the database
+            var db = new Online_MarketEntities5();
+            db.Orders.Add(order);
+            db.SaveChanges();
+
+            // Optionally: Save order items to a separate table, if necessary
+            foreach (var product in cart)
+            {
+                OrderItem orderItem = new OrderItem
+                {
+                    OrderId = order.OrderId,
+                    ProductId = product.ProductId,
+                    Quantity = product.Quantity
+                };
+                db.OrderItems.Add(orderItem);
+            }
+            db.SaveChanges();
+
+            // Clear the cart in the session after the order is confirmed
+            Session["Cart"] = new List<Product>();
+
+            return View(order);
+        }
+
+        private int GetCustomerIdFromUsername(string username)
+        {
+            using (var db = new Online_MarketEntities5()) // Replace Online_MarketEntities3 with your actual DbContext class
+            {
+                var customer = db.Customers.FirstOrDefault(c => c.Username == username);
+                if (customer != null)
+                {
+                    return customer.CustomerId;
+                }
+                else
+                {
+                    // Handle the case where the customer with the given username is not found
+                    // You might want to log this or return a default/fallback customer ID.
+                    // For now, returning -1 as a placeholder value.
+                    return -1;
+                }
+            }
+        }
+
+
         [HttpGet]
         public ActionResult ViewCart()
         {

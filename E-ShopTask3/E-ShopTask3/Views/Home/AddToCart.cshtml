@@ -36,7 +36,7 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.ActionLink("Confirm", "", new { id = item.ProductId }) |
+                @Html.ActionLink("Confirm", "ConfirmOrder", new { id = item.ProductId }) |
                 @Html.ActionLink("Remove", "RemoveFromCart", new { id = item.ProductId })
             </td>
         </tr>

@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="248343300c204a0baf29e5dbfb28b87c" Name="Diagram1" ZoomLevel="86">
+      <Diagram DiagramId="e1e8a278c9024c598db99ccfd6d6cc0a" Name="Diagram1">
         <EntityTypeShape EntityType="Model.Category" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.OrderItem" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Order" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Order" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_Products_Categories" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Orders_Customers" ManuallyRouted="false" />

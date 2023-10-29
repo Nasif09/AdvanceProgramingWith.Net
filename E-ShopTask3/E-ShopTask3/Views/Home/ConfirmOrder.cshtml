@@ -1,0 +1,15 @@
+﻿@model E_ShopTask3.EF.Order
+
+@{
+    ViewBag.Title = "Confirm Order";
+}
+
+<h2>Order Confirmed</h2>
+
+<p>Order ID: @Model.OrderId</p>
+<p>Quantity: @Model.Quantity</p>
+<p>Total Price: @Model.Price</p>
+<p>Status: @Model.Status</p>
+<p>Issue Date: @Model.IssueDate</p>
+
+<p>Thank you for your order!</p>
