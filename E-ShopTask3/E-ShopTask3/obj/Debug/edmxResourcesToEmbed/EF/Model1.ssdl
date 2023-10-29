@@ -41,6 +41,7 @@
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="ProductCount" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_OrderItems_Orders">
     <End Role="Orders" Type="Self.Orders" Multiplicity="1" />

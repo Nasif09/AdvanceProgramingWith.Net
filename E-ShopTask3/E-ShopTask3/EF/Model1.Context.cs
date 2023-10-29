@@ -13,10 +13,10 @@ namespace E_ShopTask3.EF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Online_MarketEntities : DbContext
+    public partial class Online_MarketEntities3 : DbContext
     {
-        public Online_MarketEntities()
-            : base("name=Online_MarketEntities")
+        public Online_MarketEntities3()
+            : base("name=Online_MarketEntities3")
         {
         }
     

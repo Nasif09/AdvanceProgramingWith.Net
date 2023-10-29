@@ -7,10 +7,9 @@
 <h2>Index</h2>
 
 <p>
-    <a href="/Home/ViewCart/">View</a>
-    @*@Html.ActionLink("ViewCart", "ViewCart") |
-    @Html.ActionLink("Continue Shoping", "Index")*@
+    <a href="/Home/ViewCart/">View Cart</a>
 </p>
+
 <table class="table">
     <tr>
         <th>
@@ -20,27 +19,27 @@
             @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CategoryId)
+            Count
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
-        <td>
-            @Html.ActionLink("AddToCart", "AddToCart", new { id=item.ProductId }) |
-            @Html.ActionLink("Quantity", "Delete", new { id=item.ProductId })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCount) 
+            </td>
+            <td>
+                @Html.ActionLink("AddToCart", "AddToCart", new { id = item.ProductId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+            </td>
+        </tr>
+    }
 </table>

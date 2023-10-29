@@ -17,7 +17,7 @@ namespace E_ShopTask3.Controllers
             }
             else
             {
-                var db = new Online_MarketEntities();
+                var db = new Online_MarketEntities3();
                 var data = db.Products.ToList();
                 return View(data);
             }
@@ -33,7 +33,7 @@ namespace E_ShopTask3.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            var db = new Online_MarketEntities();
+            var db = new Online_MarketEntities3();
             var matchs = db.Customers.FirstOrDefault(u => u.Username == username && u.Password == password);
 
             if (matchs != null)
@@ -58,7 +58,7 @@ namespace E_ShopTask3.Controllers
             }
             else
             {
-                var db = new Online_MarketEntities();
+                var db = new Online_MarketEntities3();
                 var productToAdd = (from d in db.Products where d.ProductId == id select d).SingleOrDefault();
                 List<Product> cart = Session["Cart"] as List<Product> ?? new List<Product>();
 
