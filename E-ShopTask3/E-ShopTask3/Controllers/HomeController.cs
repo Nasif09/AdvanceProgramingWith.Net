@@ -62,26 +62,25 @@ namespace E_ShopTask3.Controllers
                 var productToAdd = (from d in db.Products where d.ProductId == id select d).SingleOrDefault();
                 List<Product> cart = Session["Cart"] as List<Product> ?? new List<Product>();
 
-                if (productToAdd != null)
+                // Check if the product with the same name and category already exists in the cart
+                var existingProduct = cart.FirstOrDefault(p => p.ProductId == productToAdd.ProductId);
+
+                if (existingProduct != null)
                 {
-                    cart.Add(productToAdd);
-                    Session["Cart"] = cart;
+                    // If the product exists, update its quantity in the session
+                    cart.Remove(existingProduct);
+                    existingProduct.Quantity += 1;
+                    cart.Add(existingProduct);
                 }
+                else
+                {
+                    // If the product does not exist, add it to the cart with quantity 1
+                    productToAdd.Quantity = 1;
+                    cart.Add(productToAdd);
+                }
+
+                Session["Cart"] = cart;
                 return View(cart);
-            }
-
-        }
-
-        [HttpPost]
-        public ActionResult AddToCart(Product p)
-        {
-            if (Session["CustomerUsernmae"] == null)
-            {
-                return RedirectToAction("Login");
-            }
-            else
-            {
-                return RedirectToAction("ViewCart");
             }
         }
         [HttpGet]

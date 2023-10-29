@@ -37,8 +37,7 @@
                 @Html.DisplayFor(modelItem => item.ProductCount) 
             </td>
             <td>
-                @Html.ActionLink("AddToCart", "AddToCart", new { id = item.ProductId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+                @Html.ActionLink("AddToCart", "AddToCart", new { id = item.ProductId }) 
             </td>
         </tr>
     }

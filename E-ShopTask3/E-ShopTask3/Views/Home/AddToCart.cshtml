@@ -1,45 +1,44 @@
-﻿@model IEnumerable<E_ShopTask3.EF.Product>
+﻿@model List<E_ShopTask3.EF.Product>
 
 @{
     ViewBag.Title = "AddToCart";
 }
 
-<h2>AddToCart</h2>
-
+<h2>Shopping Cart</h2>
 <p>
-    @Html.ActionLink("Back", "Index")
-    @Html.ActionLink("Continue Shoping", "Index")
+    <a href="/Home/Index/">Cotinue Shoping</a>
 </p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Product Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            Price
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CategoryId)
+            Quantity
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
-        <td>
-            @Html.ActionLink("Confirm", "", new { id=item.ProductId }) |
-            @Html.ActionLink("Remove", "RemoveFromCart", new { id=item.ProductId })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.ActionLink("Confirm", "", new { id = item.ProductId }) |
+                @Html.ActionLink("Remove", "RemoveFromCart", new { id = item.ProductId })
+            </td>
+        </tr>
+    }
 </table>
