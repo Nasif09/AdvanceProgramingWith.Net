@@ -7,6 +7,7 @@
 <h2>Shopping Cart</h2>
 <p>
     <a href="/Home/Index/">Cotinue Shoping</a>
+    @Html.ActionLink("Confirm", "ConfirmOrder", new { id = ViewBag.ProductId }) 
 </p>
 
 <table class="table">
@@ -33,10 +34,9 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
+                <input type="number" name="quantity" value="@item.Quantity" min="1" class="btn btn-outline-secondary" />
             </td>
             <td>
-                @Html.ActionLink("Confirm", "ConfirmOrder", new { id = item.ProductId }) |
                 @Html.ActionLink("Remove", "RemoveFromCart", new { id = item.ProductId })
             </td>
         </tr>

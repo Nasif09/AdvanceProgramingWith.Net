@@ -26,6 +26,7 @@ namespace E_ShopTask3.EF
         public int CategoryId { get; set; }
         public int ProductCount { get; set; }
         public int Quantity { get; set; }
+        public Decimal TotalPrice { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

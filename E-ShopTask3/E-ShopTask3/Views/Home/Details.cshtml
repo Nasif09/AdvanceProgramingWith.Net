@@ -1,0 +1,43 @@
+﻿@model List<E_ShopTask3.EF.Product>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<p>
+    @Html.ActionLink("Cotinue Shoping", "Index", new { id = ViewBag.quantity })
+    @Html.ActionLink("Confirm", "ConfirmOrder")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <input type="number" name="Quantity" value="1" min ="1" max="@item.ProductCount">
+            </td>
+            @*<td>
+                @Html.ActionLink("Add", "RemoveFromCart", new { id = item.ProductId })
+            </td>*@
+        </tr>
+    }
+</table>
