@@ -16,22 +16,18 @@ namespace ZeroHunger.Controllers
         {
             DB = new Zero_HungerEntities3();
         }
-
-        // Action for displaying all details of collect requests
         public ActionResult ViewCollectRequests()
         {
             var collectRequests = DB.CollectRequests.ToList();
             return View(collectRequests);
         }
 
-        // Action for displaying details of a specific collect request
         public ActionResult CollectRequestDetails(int id)
         {
             var collectRequest = DB.CollectRequests.Find(id);
 
             if (collectRequest == null)
             {
-                // Handle the case where the collect request is not found
                 return HttpNotFound();
             }
 
@@ -51,7 +47,6 @@ namespace ZeroHunger.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            // Find the collect request by id
             var collectRequest = DB.CollectRequests.Find(id);
 
             if (collectRequest == null)
@@ -69,14 +64,9 @@ namespace ZeroHunger.Controllers
             {
                 return View(collectRequest);
             }
-
-            // Attach the entity to the context and mark it as modified
             DB.Entry(collectRequest).State = EntityState.Modified;
-
-            // Save changes to the database
             DB.SaveChanges();
-
-            return RedirectToAction("ViewCollectRequests"); // Or any other appropriate action
+            return RedirectToAction("ViewCollectRequests"); 
         }
 
         protected override void Dispose(bool disposing)
