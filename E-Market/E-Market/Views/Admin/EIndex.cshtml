@@ -1,0 +1,62 @@
+﻿@model IEnumerable<E_Market.EF.Order>
+
+@{
+    ViewBag.Title = "EIndex";
+}
+<hr />
+<h1 class="text-center">Welcome Admin</h1>
+<hr />
+
+<p>
+    @Html.ActionLink("Go Products", "Products", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Logout", "Logout", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Order ID
+        </th>
+        <th>
+            Product ID
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Status
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var order in Model)
+    {
+        foreach (var orderItem in order.OrderItems)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => orderItem.OrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => orderItem.ProductId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => orderItem.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => order.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => order.Status)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Details", "Details", new { id = order.OrderId }, new { @class = "btn btn-primary" })*@
+                    @Html.ActionLink("Process", "Process", new { id = order.OrderId }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        }
+    }
+</table>

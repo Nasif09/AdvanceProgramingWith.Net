@@ -81,3 +81,5 @@ E:\AdvanceProgramingWith.Net\ZeroHunger\ZeroHunger\obj\Debug\ZeroHunger.csproj.C
 E:\AdvanceProgramingWith.Net\ZeroHunger\ZeroHunger\obj\Debug\ZeroHunger.csproj.CopyComplete
 E:\AdvanceProgramingWith.Net\ZeroHunger\ZeroHunger\obj\Debug\ZeroHunger.dll
 E:\AdvanceProgramingWith.Net\ZeroHunger\ZeroHunger\obj\Debug\ZeroHunger.pdb
+E:\AdvanceProgramingWith.Net\ZeroHunger\ZeroHunger\bin\AutoMapper.dll
+E:\AdvanceProgramingWith.Net\ZeroHunger\ZeroHunger\bin\AutoMapper.xml

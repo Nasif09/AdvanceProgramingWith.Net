@@ -1,13 +1,13 @@
-﻿@model ZeroHunger.EF.CollectRequest
+﻿@model ZeroHunger.DTOs.OpenCollectRequestDTO
 
 @{
     ViewBag.Title = "OpenCollectRequest";
 }
 
-<h3>Open A New CollectRequest</h3>
-
+<h2>Open New CollectRequest</h2>
+<hr />
 <div>
-    @Html.ActionLink("Home", "Index",null,new {@class = "btn btn-primary"})
+    @Html.ActionLink("Home", "Index", null, new { @class = "btn btn-primary" })
 </div>
 
 @using (Html.BeginForm())
@@ -15,6 +15,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
+        <h4>OpenCollectRequestDTO</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -49,6 +50,7 @@
                 @Html.ValidationMessageFor(model => model.MaxPreservationTime, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -56,3 +58,4 @@
         </div>
     </div>
 }
+

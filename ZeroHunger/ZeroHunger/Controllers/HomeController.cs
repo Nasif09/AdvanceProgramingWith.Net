@@ -1,9 +1,11 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using ZeroHunger.DTOs;
 using ZeroHunger.EF;
 
 namespace ZeroHunger.Controllers
@@ -24,41 +26,35 @@ namespace ZeroHunger.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Registration login)
+        public ActionResult Login(LoginDTO login)
         {
-            if (ModelState.IsValid)
+            var user = (from usr in db.Registrations
+                        where usr.Username.Equals(login.Username) && usr.Password.Equals(login.Password)
+                        select usr).SingleOrDefault();
+
+            if (user != null)
             {
-                var user = (from usr in db.Registrations
-                            where usr.Username.Equals(login.Username) && usr.Password.Equals(login.Password)
-                            select usr).SingleOrDefault();
+                Session["user"] = user;
+                var returnUrl = Request["ReturnUrl"];
 
-                if (user != null)
+                if (returnUrl != null)
                 {
-                    Session["user"] = user;
-                    var returnUrl = Request["ReturnUrl"];
-
-                    if (returnUrl != null)
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    else if (user.Role.Equals("Donner"))
-                    {
-                        return RedirectToAction("Index", "CollectRequest");
-                    }
-                    else if (user.Role.Equals("Employee"))
-                    {
-                        return RedirectToAction("AssignedCollectRequests", "Employee", new { userId = user.UserId });
-                    }
-                    else if (user.Role.Equals("NGO"))
-                    {
-                        return RedirectToAction("ViewCollectRequests", "NGO");
-                    }
+                    return Redirect(returnUrl);
                 }
-
-                TempData["Msg"] = "Username or Password is Invalid";
+                else if (user.Role.Equals("Donner"))
+                {
+                    return RedirectToAction("Index", "CollectRequest");
+                }
+                else if (user.Role.Equals("Employee"))
+                {
+                    return RedirectToAction("AssignedCollectRequests", "Employee", new { userId = user.UserId });
+                }
+                else if (user.Role.Equals("NGO"))
+                {
+                    return RedirectToAction("ViewCollectRequests", "NGO");
+                }
             }
-
-            return View(login);
+        return View(login);
         }
 
 

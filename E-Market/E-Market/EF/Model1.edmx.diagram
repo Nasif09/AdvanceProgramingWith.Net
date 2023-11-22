@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="350b7cebba3c4aeda23837423fbda6d4" Name="Diagram1" ZoomLevel="111">
+        <EntityTypeShape EntityType="EMarketModel.Category" Width="1.5" PointX="4.125" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EMarketModel.OrderItem" Width="1.5" PointX="6.625" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EMarketModel.Order" Width="1.5" PointX="4.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EMarketModel.Product" Width="1.5" PointX="6.875" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EMarketModel.Registration" Width="1.5" PointX="1.75" PointY="2.375" IsExpanded="true" />
+        <AssociationConnector Association="EMarketModel.FK_Products_Categorys" ManuallyRouted="false" />
+        <AssociationConnector Association="EMarketModel.FK_OrderItems_Orders" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EMarketModel.Customer" Width="1.5" PointX="1.875" PointY="4.75" />
+        <AssociationConnector Association="EMarketModel.FK_Orders_Customers" />
+        <AssociationConnector Association="EMarketModel.FK_OrderItems_Products" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

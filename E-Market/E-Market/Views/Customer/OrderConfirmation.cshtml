@@ -1,0 +1,25 @@
+﻿@model E_Market.EF.Order
+
+@{
+    ViewBag.Title = "Order Confirmation";
+}
+
+<h2>Order Confirmation</h2>
+
+@if (Model != null)
+{
+    <p>Thank you for your order! Your order details:</p>
+    <ul>
+        <li>Order ID: @Model.OrderId</li>
+        <li>Quantity: @Model.Quantity</li>
+        <li>Total Price: @Model.Price</li>
+        <!-- Add additional order details as needed -->
+    </ul>
+
+    @Html.ActionLink("Continue Shopping", "Index", new { controller = "Customer" }, new { @class = "btn btn-primary" })
+}
+else
+{
+    <p>No order information available. Please check your order status later.</p>
+    @Html.ActionLink("Back to Home", "Index", new { controller = "Customer" }, new { @class = "btn btn-primary" })
+}

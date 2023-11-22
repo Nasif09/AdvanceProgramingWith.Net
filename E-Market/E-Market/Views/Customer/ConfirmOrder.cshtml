@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Confirm Order";
+}
+
+<h2>Confirm Order</h2>
+
+@if (Model != null)
+{
+    <p>Order Summary:</p>
+    <ul>
+        <li>Customer ID: @Model.CustomerId</li>
+        <li>Quantity: @Model.Quantity</li>
+        <li>Total Price: @Model.Price</li>
+        <!-- Add additional order details as needed -->
+    </ul>
+
+    @Html.ActionLink("Continue Shopping", "Index", new { controller = "Customer" }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Order Confirmation", "OrderConfirmation", new { orderId = Model.OrderId }, new { @class = "btn btn-success" })
+}
+else
+{
+    <p>Unable to confirm order. The cart is empty or there was an issue with the order.</p>
+    @Html.ActionLink("Back to Cart", "ViewCart", new { controller = "Customer" }, new { @class = "btn btn-primary" })
+}

@@ -1,9 +1,11 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ZeroHunger.DTOs;
 using ZeroHunger.EF;
 
 namespace ZeroHunger.Controllers
@@ -30,17 +32,25 @@ namespace ZeroHunger.Controllers
         }
 
         [HttpPost]
-        public ActionResult OpenCollectRequest(CollectRequest collectRequest)
+        public ActionResult OpenCollectRequest(OpenCollectRequestDTO openCollectRequest)
         {
             if (!ModelState.IsValid)
             {
-                return View(collectRequest);
+                return View(openCollectRequest);
             }
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<OpenCollectRequestDTO, CollectRequest>());
+            var mapper = new Mapper(config);
+            var collectRequest = mapper.Map<CollectRequest>(openCollectRequest);
+
             collectRequest.Status = "Requested";
+
             DB.CollectRequests.Add(collectRequest);
             DB.SaveChanges();
+
             return RedirectToAction("Index");
         }
+
         public ActionResult Details(int id)
         {
             var collectRequest = DB.CollectRequests.Include("FoodItems").FirstOrDefault(c => c.RequestID == id);
@@ -61,23 +71,37 @@ namespace ZeroHunger.Controllers
             {
                 return HttpNotFound();
             }
-            return View(collectRequest);
+
+            var config = new MapperConfiguration(cfg => { cfg.CreateMap<CollectRequest, CollectRequestDTO>(); });
+            var mapper = new Mapper(config);
+            var data = mapper.Map<CollectRequestDTO>(collectRequest);
+
+            return View(data);
         }
 
+
         [HttpPost]
-        public ActionResult Edit(CollectRequest collectRequest)
+        public ActionResult Edit(CollectRequestDTO collectRequest)
         {
+            var config = new MapperConfiguration(cfg => { cfg.CreateMap<CollectRequestDTO, CollectRequest>(); });
+            var mapper = new Mapper(config);
+            var data = mapper.Map<CollectRequest>(collectRequest);
+
             if (!ModelState.IsValid)
             {
                 return View(collectRequest);
             }
-
-            DB.Entry(collectRequest).State = EntityState.Modified;
-
-            DB.SaveChanges();
-
+            foreach (var key in ModelState.Keys)
+            {
+                var modelState = ModelState[key];
+                foreach (var error in modelState.Errors)
+                {
+                    Console.WriteLine($"Error in {key}: {error.ErrorMessage}");
+                }
+            }
             return RedirectToAction("Index");
         }
+
         public ActionResult Delete(int id)
         {
             var collectRequest = DB.CollectRequests.Find(id);
